@@ -1,0 +1,262 @@
+
+import java.util.Scanner;
+public class LinkedList
+{   
+    
+    Scanner sc = new Scanner(System.in);
+    public LinkedList()
+    {
+        // initialise instance variables
+        
+    }
+    public class Node
+    {
+        int info;
+        Node next;
+    public Node(int n)
+    {
+        info=n;
+        next=null;
+    }
+    public Node()
+    {}
+        
+    }
+    
+
+    
+void addAtHead(Node head,int n)
+{
+    
+       Node ptr= new Node(n);
+    
+    
+    if(head==null)
+        head=ptr;
+
+
+    else
+    {
+        ptr.next=head;
+        head=ptr;
+    }
+}
+
+void deleteFromHead(Node head)
+{
+    if(head==null)
+        System.out.printf("\nEmpty list\n");
+    else
+    {
+        Node p=head;
+        System.out.printf("%d ",p.info);
+        p=p.next;
+        
+        head=p;
+    }
+
+}
+
+void addAtTail(Node head,int n)
+{
+    
+    Node ptr=new Node(n);
+    if(head==null)
+        head=ptr;
+    else
+    {
+        Node p=head;
+        while(p.next!=null)
+            p=p.next;
+        p.next=ptr;
+    }
+
+}
+void deleteFromTail(Node head)
+{
+    if(head==null)
+        System.out.printf("\nEmpty list\n");
+    else
+    {
+        Node p=head;
+        Node q=null;
+        while(p.next!=null)
+        {
+            q=p;
+            p=p.next;
+        }
+        if(p==head)
+        {
+            System.out.printf("%d ",p.info);
+            
+            head=null;
+        }
+        else
+        {
+            q.next=p.next;
+            System.out.printf("%d ",p.info);
+            
+        }
+    }
+}
+void deleteGivenPos(Node head,int key)
+{
+    if(head==null)
+        System.out.printf("\nEmpty list\n");
+    else
+    {
+        Node q=null;
+        Node p=head;
+        while(p!=null && p.info!=key)
+        {
+            q=p;
+            p=p.next;
+        }
+        if(p==null)
+            System.out.printf("\nElement not found\n");
+        else
+        {
+            System.out.printf("%d ",p.info);
+            q.next=p.next;
+            
+        }
+    }
+}
+
+void insertAfter(Node head,int n,int key)
+{
+
+    if(head==null)
+        System.out.printf("\nEmpty list\n");
+    else
+    {
+        Node p=head;
+        while(p!=null && p.info!=key)
+            p=p.next;
+
+        if(p!=null)
+            System.out.printf("\nKey not found\n");
+        else
+        {
+            Node ptr=new Node(n);
+            ptr.next=p.next;
+            p.next=ptr;
+        }
+    }
+}
+
+void insertBefore(Node head, int n, int key)
+{
+
+    if(head==null)
+        System.out.printf("\nEmpty list\n");
+    else
+    {
+        Node p = head;
+        Node q=null;
+        while(p!=null && p.info!=key)
+        {
+            q=p;
+            p=p.next;
+        }
+        if(p!=null)
+            System.out.printf("\nKey not found\n");
+        else if(p==head)
+            addAtHead(head,n);
+        else
+        {
+           Node ptr=new Node(n);
+            ptr.next=p;
+            q.next=ptr;
+        }
+    }
+}
+void printList(Node head)
+{
+    if(head==null)
+        System.out.printf("Empty list");
+    else
+    {
+        Node p=head;
+        while(p!=null)
+        {
+            System.out.printf("%d  ",p.info);
+            p=p.next;
+        }
+    }
+}
+void execute(LinkedList list)
+{
+    int i,n,p;
+    //Node head=null;
+    //LinkedList lis=new LinkedList();
+    LinkedList.Node head=list.new Node();
+    head=null;
+    
+    while(true)
+    {
+        System.out.printf("\n Enter 1 to add at tail\n 2 to add at head\n 3 to delete from head\n 4 to delete from tail\n 5 to delete given key\n 6 to insert after a key\n 7 to insert before a key\n 8 to print list\n 9 to exit\n");
+        i=sc.nextInt();
+        switch(i)
+        {
+        case 1:
+            System.out.printf("\nEnter data\n");
+            n=sc.nextInt();
+            list.addAtTail(head,n);
+            break;
+        case 2:
+            System.out.printf("\nEnter data\n");
+            n=sc.nextInt();
+            list.addAtHead(head,n);
+            break;
+        case 3:
+            list.deleteFromHead(head);
+            break;
+        case 4:
+            list.deleteFromTail(head);
+            break;
+        case 5:
+            System.out.printf("\nEnter the key\n");
+            p=sc.nextInt();
+            list.deleteGivenPos(head,p);
+            break;
+        case 6:
+            System.out.printf("\nEnter the key\n");
+            p=sc.nextInt();
+            System.out.printf("\nEnter data\n");
+            n=sc.nextInt();
+            list.insertAfter(head,n,p);
+            break;
+        case 7:
+            System.out.printf("\nEnter the key\n");
+            p=sc.nextInt();
+            System.out.printf("\nEnter data\n");
+            n=sc.nextInt();
+            list.insertBefore(head,n,p);
+            break;
+        case 8:
+            list.printList(head);
+            break;
+        case 9:
+            System.exit(-1);
+            break;
+        default:
+            System.out.printf("\nWrong Choice\n");
+
+
+
+
+        }
+
+    }
+
+
+}
+    public static void main(String args[])
+    {
+        LinkedList list = new LinkedList();
+        
+        list.execute(list);
+    }
+        
+}
